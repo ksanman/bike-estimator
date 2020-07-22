@@ -1,0 +1,25 @@
+<div class="form-group row" [formGroup]="partGroup">
+  <div class="col d-flex justify-content-center align-items-end">
+    <h5>{{category.name}}</h5>
+  </div>
+  <div class="col">
+    <label> Part Name </label>
+    <input class="form-control" type="text" formControlName="name"/>
+  </div>
+  <div class="col">
+    <label> Price </label>
+    <input *ngIf="bikeFormService.calculatePrice.value" class="form-control" type="text" formControlName="price" prefix="$" mask="separator.2" thousandSeparator=","/>
+    <input *ngIf="!bikeFormService.calculatePrice.value" class="form-control" type="text" readonly [value]="getPartPrice()"/>
+  </div>
+  <div class="col">
+    <label> Weight </label>
+    <input *ngIf="bikeFormService.calculateWeight.value" class="form-control" type="text" formControlName="weight" mask="separator.2" thousandSeparator=","/>
+    <input *ngIf="!bikeFormService.calculateWeight.value" class="form-control" type="text" readonly [value]="getPartWeight()"/>
+  </div>
+  <div class="col d-flex justify-content-center align-items-end">
+    <button class="btn btn-success" (click)="open(choosePartModal)">Choose part</button>
+  </div>
+</div>
+<ng-template #choosePartModal let-modal>
+  <app-part-picker [category]="category" [modal]="modal" (partSelected)="selectPart($event)"></app-part-picker>
+</ng-template>

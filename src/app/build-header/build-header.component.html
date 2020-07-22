@@ -1,0 +1,36 @@
+ <div class="build-header" [formGroup]="bikeFormService.form">
+  <h2>Bike Build Estimator</h2>
+  <div class="row">
+    <div class="col-sm-6">
+      <div class="form-group">
+        <label for="name"> Name </label>
+        <input class="form-control" id="name" type="text" formControlName="name" required/>
+        <div *ngIf="bikeFormService.name.invalid && (bikeFormService.name.dirty || bikeFormService.name.touched)" class="alert alert-danger">
+          <div *ngIf="bikeFormService.name.errors.required">Name is required</div>
+        </div>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="buildPrice"> Price </label>
+        <input *ngIf="!bikeFormService.calculatePrice.value" class="form-control" id="buildPrice" type="text" formControlName="price" prefix="$" mask="separator.2" thousandSeparator=","/>
+        <input *ngIf="bikeFormService.calculatePrice.value" class="form-control" id="buildPrice" type="text" readonly [value]="getPrice()"/>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="calculatePrice" formControlName="calculatePrice">
+        <label class="form-check-label" for="calculatePrice"> Calculate Build Price? </label>
+      </div>
+    </div>
+    <div class="col-sm-3">
+      <div class="form-group">
+        <label for="buildWeight"> Weight </label>
+        <input *ngIf="!bikeFormService.calculateWeight.value" class="form-control" id="buildWeight" type="text" formControlName="weight" mask="separator.2" thousandSeparator=","/>
+        <input *ngIf="bikeFormService.calculateWeight.value" class="form-control" id="buildWeight" type="text" readonly [value]="getWeight()"/>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="calculateWeight" formControlName="calculateWeight">
+        <label class="form-check-label" for="calculateWeight"> Calculate Build Weight? </label>
+      </div>
+    </div>
+  </div>
+</div>

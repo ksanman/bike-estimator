@@ -1,0 +1,9 @@
+<div [formGroup]="bikeFormService.form">
+  <div class="form-group" formArrayName="parts">
+    <h4> Build Parts </h4>
+    <button class="btn btn-secondary" (click)="bikeFormService.addPart()"> Add Part </button>
+    <div *ngFor="let part of bikeFormService.parts.controls; let i = index;">
+      <app-bike-build-part [part]="part" [index]="i"></app-bike-build-part>
+    </div>
+  </div>
+</div>
